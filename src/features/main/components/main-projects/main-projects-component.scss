@@ -1,3 +1,5 @@
+@use '../../../../styles/media-hover' as *;
+
 :host {
   display: block;
   width: 100%;
@@ -63,9 +65,11 @@
     background 0.2s,
     color 0.2s;
 
-  &:hover {
-    border-color: #2a2a2a;
-    background: rgb(42 42 42 / 6%);
+  @include media-hover {
+    &:hover {
+      border-color: #2a2a2a;
+      background: rgb(42 42 42 / 6%);
+    }
   }
 }
 
@@ -332,17 +336,19 @@
     transition: box-shadow 0.22s ease;
   }
 
-  .projects__slide--light .projects__pill:hover,
-  .projects__slide--dark .projects__pill:hover {
-    transform: none;
-  }
+  @include media-hover {
+    .projects__slide--light .projects__pill:hover,
+    .projects__slide--dark .projects__pill:hover {
+      transform: none;
+    }
 
-  .projects__slide--light .projects__pill:hover {
-    box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
-  }
+    .projects__slide--light .projects__pill:hover {
+      box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
+    }
 
-  .projects__slide--dark .projects__pill:hover {
-    box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    .projects__slide--dark .projects__pill:hover {
+      box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    }
   }
 }
 

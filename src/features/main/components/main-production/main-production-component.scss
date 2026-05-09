@@ -1,3 +1,5 @@
+@use '../../../../styles/media-hover' as *;
+
 :host {
   display: block;
   width: 100%;
@@ -87,9 +89,11 @@
     transition: box-shadow 0.22s ease;
   }
 
-  .production__buttons button:hover {
-    transform: none;
-    box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+  @include media-hover {
+    .production__buttons button:hover {
+      transform: none;
+      box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    }
   }
 }
 

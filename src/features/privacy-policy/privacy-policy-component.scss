@@ -1,3 +1,5 @@
+@use '../../styles/media-hover' as *;
+
 .privacy-policy {
   box-sizing: border-box;
   width: 100%;
@@ -91,7 +93,9 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 
-  &:hover {
-    color: #d66a24;
+  @include media-hover {
+    &:hover {
+      color: #d66a24;
+    }
   }
 }

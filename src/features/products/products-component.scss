@@ -1,3 +1,5 @@
+@use '../../styles/media-hover' as *;
+
 :host {
   display: block;
   width: 100%;
@@ -193,17 +195,19 @@
     transition: box-shadow 0.22s ease;
   }
 
-  .products-card--light .products-card__pill:hover,
-  .products-card--dark .products-card__pill:hover {
-    transform: none;
-  }
+  @include media-hover {
+    .products-card--light .products-card__pill:hover,
+    .products-card--dark .products-card__pill:hover {
+      transform: none;
+    }
 
-  .products-card--light .products-card__pill:hover {
-    box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
-  }
+    .products-card--light .products-card__pill:hover {
+      box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
+    }
 
-  .products-card--dark .products-card__pill:hover {
-    box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    .products-card--dark .products-card__pill:hover {
+      box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    }
   }
 }
 

@@ -1,3 +1,5 @@
+@use '../../../styles/media-hover' as *;
+
 :host {
   display: block;
   width: 100%;
@@ -48,8 +50,10 @@
   color: #e57328;
   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+  @include media-hover {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &:focus-visible {
@@ -125,9 +129,11 @@
     transition: box-shadow 0.22s ease;
   }
 
-  .work-gallery__cta:hover {
-    transform: none;
-    box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+  @include media-hover {
+    .work-gallery__cta:hover {
+      transform: none;
+      box-shadow: 0 10px 26px rgb(0 0 0 / 48%);
+    }
   }
 }
 
@@ -281,9 +287,11 @@
     background 0.2s,
     border-color 0.2s;
 
-  &:hover {
-    background: rgb(255 255 255 / 12%);
-    border-color: rgb(255 255 255 / 50%);
+  @include media-hover {
+    &:hover {
+      background: rgb(255 255 255 / 12%);
+      border-color: rgb(255 255 255 / 50%);
+    }
   }
 
   &:focus-visible {
@@ -352,9 +360,11 @@
     opacity: 0.92;
   }
 
-  &:hover {
-    border-color: rgb(255 255 255 / 65%);
-    background: rgb(0 0 0 / 58%);
+  @include media-hover {
+    &:hover {
+      border-color: rgb(255 255 255 / 65%);
+      background: rgb(0 0 0 / 58%);
+    }
   }
 
   &:focus-visible {

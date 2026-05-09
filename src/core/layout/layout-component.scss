@@ -1,3 +1,5 @@
+@use '../../styles/media-hover' as *;
+
 :host {
   --layout-host-padding-top: 40px;
   --layout-page-margin: calc(
@@ -38,8 +40,10 @@
 .brand {
   text-decoration: none;
 
-  &:hover {
-    opacity: 0.85;
+  @include media-hover {
+    &:hover {
+      opacity: 0.85;
+    }
   }
 
   img {
@@ -65,9 +69,11 @@
       opacity 0.22s ease,
       color 0.2s ease;
 
-    &:hover {
-      opacity: 1;
-      color: #c7531e;
+    @include media-hover {
+      &:hover {
+        opacity: 1;
+        color: #c7531e;
+      }
     }
 
     &.is-active {
@@ -77,8 +83,10 @@
       letter-spacing: 0.01em;
       transform: translateY(-1px);
 
-      &:hover {
-        color: #e8782e;
+      @include media-hover {
+        &:hover {
+          color: #e8782e;
+        }
       }
     }
   }
@@ -97,8 +105,10 @@
       color 0.2s ease;
   }
 
-  .nav .link:not(.is-active):hover {
-    transform: none;
+  @include media-hover {
+    .nav .link:not(.is-active):hover {
+      transform: none;
+    }
   }
 
   .mobile-nav {
@@ -131,9 +141,11 @@
     color 0.2s ease,
     box-shadow 0.2s ease;
 
-  &:hover {
-    background: #2a2a2a;
-    color: #fff;
+  @include media-hover {
+    &:hover {
+      background: #2a2a2a;
+      color: #fff;
+    }
   }
 
   &:focus-visible {
@@ -243,10 +255,12 @@
     color 0.2s ease,
     background-color 0.2s ease;
 
-  &:hover {
-    opacity: 1;
-    color: #c7531e;
-    background: rgb(231 115 40 / 8%);
+  @include media-hover {
+    &:hover {
+      opacity: 1;
+      color: #c7531e;
+      background: rgb(231 115 40 / 8%);
+    }
   }
 
   &.is-active {
@@ -356,9 +370,11 @@
   font-weight: 500;
   color: #2a2a2a;
 
-  &:hover {
-    background-color: #2a2a2a;
-    color: #fff;
+  @include media-hover {
+    &:hover {
+      background-color: #2a2a2a;
+      color: #fff;
+    }
   }
 
   &:focus-visible {
@@ -470,8 +486,10 @@
   display: inline-block;
   text-decoration: none;
 
-  &:hover {
-    opacity: 0.9;
+  @include media-hover {
+    &:hover {
+      opacity: 0.9;
+    }
   }
 }
 
@@ -509,9 +527,11 @@
     object-fit: contain;
   }
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 14px rgb(0 0 0 / 25%);
+  @include media-hover {
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 14px rgb(0 0 0 / 25%);
+    }
   }
 }
 
@@ -544,9 +564,11 @@
     opacity 0.22s ease,
     color 0.2s ease;
 
-  &:hover {
-    opacity: 1;
-    color: #c7531e;
+  @include media-hover {
+    &:hover {
+      opacity: 1;
+      color: #c7531e;
+    }
   }
 
   &.is-active {
@@ -556,8 +578,10 @@
     letter-spacing: 0.01em;
     transform: translateY(-1px);
 
-    &:hover {
-      color: #e8782e;
+    @include media-hover {
+      &:hover {
+        color: #e8782e;
+      }
     }
   }
 }
@@ -575,8 +599,10 @@
       color 0.2s ease;
   }
 
-  .footer__nav-link:not(.is-active):hover {
-    transform: none;
+  @include media-hover {
+    .footer__nav-link:not(.is-active):hover {
+      transform: none;
+    }
   }
 }
 
@@ -617,8 +643,10 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 
-  &:hover {
-    color: #fff;
+  @include media-hover {
+    &:hover {
+      color: #fff;
+    }
   }
 }
 

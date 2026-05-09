@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use '../../../../styles/media-hover' as *;
 
 :host {
   display: flex;
@@ -107,8 +108,10 @@
   color: inherit;
   transition: opacity 0.2s ease;
 
-  &:hover {
-    opacity: 0.72;
+  @include media-hover {
+    &:hover {
+      opacity: 0.72;
+    }
   }
 }
 
