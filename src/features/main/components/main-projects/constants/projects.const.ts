@@ -1,14 +1,13 @@
 import { IProjectsSlide } from '../models/projects.model';
 
 /**
- * Как у main-products (main-products.const.ts + main-products-component.html): 2 до 768px, 3 от 768px;
- * на ≥1440 ширина карточки совпадает с variants при одинаковом layout-page-margin.
+ * Как у main-products: 1 слайд до 768px, 3 от 768px.
  */
 export const PROJECTS_SWIPER_BREAKPOINTS: Record<
   string,
   { slidesPerView: number; spaceBetween: number }
 > = {
-  '0': { slidesPerView: 2, spaceBetween: 12 },
+  '0': { slidesPerView: 1, spaceBetween: 16 },
   '768': { slidesPerView: 3, spaceBetween: 16 },
 };
 

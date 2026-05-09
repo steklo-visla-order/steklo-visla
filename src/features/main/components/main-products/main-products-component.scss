@@ -110,13 +110,14 @@
 }
 
 .main-products__slide-overlay {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
   display: flex;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  height: 100%;
+  min-height: 0;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem 1.375rem 1.25rem;
@@ -142,6 +143,7 @@
 
 .main-products__slide-actions {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   width: 100%;
   min-width: 0;
@@ -291,7 +293,20 @@
   }
 }
 
-/* Два слайда в ряд: узкая карточка — читаемая типографика на мобильных */
+@media (width < 768px) {
+  .main-products__swiper-bleed {
+    width: calc(100% + 2 * var(--layout-page-margin, 40px));
+    margin-inline: calc(-1 * var(--layout-page-margin, 40px));
+    padding-inline: max(0.75rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  }
+
+  .main-products__slide {
+    max-height: min(91vh, 47rem);
+    max-height: min(91dvh, 47rem);
+    aspect-ratio: 5 / 8;
+  }
+}
+
 @media (width <= 768px) {
   .main-products__slide-overlay {
     padding: 1.15rem 0.9rem 1rem;
@@ -323,7 +338,6 @@
   }
 
   .main-products__slide {
-    max-height: min(16rem, 68vw);
     border-radius: calc(14px + 2px * var(--wide-t));
   }
 

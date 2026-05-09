@@ -80,13 +80,15 @@
 }
 
 .products-card__overlay {
-  position: relative;
+  /* inset вместо height:100%: WebKit + aspect-ratio на родителе */
+  position: absolute;
+  inset: 0;
   z-index: 1;
   display: flex;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  height: 100%;
+  min-height: 0;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem 1.375rem 1.25rem;
@@ -112,6 +114,7 @@
 
 .products-card__actions {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   width: 100%;
   min-width: 0;
