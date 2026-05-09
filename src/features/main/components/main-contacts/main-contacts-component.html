@@ -1,0 +1,43 @@
+<div class="contacts__map-wrap">
+  <div class="contacts__map" #mapHost role="application" aria-label="Карта с адресом офиса"></div>
+</div>
+
+<div class="contacts__wrapper">
+  <div class="contacts__header">
+    <h2 class="contacts__title font-dewi">Контакты</h2>
+  </div>
+
+  <div class="contacts__actions">
+    <div class="contacts__item">
+      <div class="contacts__item-body">
+        <img class="contacts__icon" src="/icons/mark.png" width="24" height="24" alt="" />
+        <span class="contacts__label">Адрес</span>
+      </div>
+      <span class="contacts__value">{{ c.address }}</span>
+    </div>
+
+    <div class="contacts__item">
+      <div class="contacts__item-body">
+        <img class="contacts__icon" src="/icons/phone.png" width="24" height="24" alt="" />
+        <span class="contacts__label">Телефон</span>
+      </div>
+      <a class="contacts__value contacts__link" [href]="c.phoneHref">{{ c.phone }}</a>
+    </div>
+
+    <div class="contacts__item">
+      <div class="contacts__item-body">
+        <img class="contacts__icon" src="/icons/mail.png" width="24" height="24" alt="" />
+        <span class="contacts__label">Почта</span>
+      </div>
+      <a class="contacts__value contacts__link" [href]="c.emailHref">{{ c.email }}</a>
+    </div>
+
+    <div class="contacts__item">
+      <div class="contacts__item-body">
+        <img class="contacts__icon" src="/icons/clock.png" width="24" height="24" alt="" />
+        <span class="contacts__label">Режим работы</span>
+      </div>
+      <span class="contacts__value">{{ c.hours }}</span>
+    </div>
+  </div>
+</div>

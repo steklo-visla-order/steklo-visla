@@ -1,0 +1,16 @@
+.contacts-page {
+  margin-bottom: 64px;
+}
+
+.contacts-page__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, calc(3.5rem + 0.2rem * var(--wide-t)));
+  font-weight: 700;
+  line-height: 1.12;
+  color: #1e1e1e;
+  margin-bottom: 27px;
+}
+
+:host ::ng-deep visla-main-contacts .contacts__title {
+  display: none !important;
+}

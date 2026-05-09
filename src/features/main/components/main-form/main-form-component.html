@@ -1,0 +1,138 @@
+<h2 class="form__title font-dewi">Остались вопросы?</h2>
+<p class="form__lead">
+  Оставьте свои контактные данные и наш менеджер свяжется с вами в ближайшее время
+</p>
+
+<visla-toast
+  [open]="successToastVisible()"
+  [message]="successToastText"
+  (closed)="onSuccessToastClosed()"
+/>
+<visla-toast
+  [open]="errorToastVisible()"
+  [message]="errorToastText"
+  (closed)="onErrorToastClosed()"
+/>
+
+<form class="form__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form__grid">
+    <div class="form__field-wrap form__field-wrap--firstName">
+      <label class="form__label" for="form-firstName">Имя</label>
+      <input
+        id="form-firstName"
+        type="text"
+        class="form__input"
+        formControlName="firstName"
+        placeholder="Имя *"
+        autocomplete="given-name"
+      />
+      <div class="form__field-hint" aria-live="polite">
+        @if (submitted() && form.controls.firstName.invalid) {
+          @switch (nameError(form.controls.firstName.errors)) {
+            @case ('required') {
+              <span class="form__error" role="alert">Укажите имя</span>
+            }
+            @case ('minlength') {
+              <span class="form__error" role="alert">Минимум 2 символа</span>
+            }
+            @case ('pattern') {
+              <span class="form__error" role="alert">Только буквы</span>
+            }
+          }
+        }
+      </div>
+    </div>
+
+    <div class="form__field-wrap form__field-wrap--phone">
+      <label class="form__label" for="form-phone">Телефон</label>
+      <input
+        vislaPhoneRu
+        id="form-phone"
+        type="tel"
+        inputmode="tel"
+        class="form__input"
+        formControlName="phone"
+        placeholder="+7 (___) ___-__-__"
+        autocomplete="tel"
+      />
+      <div class="form__field-hint" aria-live="polite">
+        @if (submitted() && form.controls.phone.invalid) {
+          @switch (phoneError(form.controls.phone.errors)) {
+            @case ('required') {
+              <span class="form__error" role="alert">Укажите телефон</span>
+            }
+            @case ('mask') {
+              <span class="form__error" role="alert">Введите номер полностью</span>
+            }
+            @case ('pattern') {
+              <span class="form__error" role="alert">Некорректный номер</span>
+            }
+          }
+        }
+      </div>
+    </div>
+
+    <div class="form__field-wrap form__field-wrap--lastName">
+      <label class="form__label" for="form-lastName">Фамилия</label>
+      <input
+        id="form-lastName"
+        type="text"
+        class="form__input"
+        formControlName="lastName"
+        placeholder="Фамилия *"
+        autocomplete="family-name"
+      />
+
+      <div class="form__field-hint" aria-live="polite">
+        @if (submitted() && form.controls.lastName.invalid) {
+          @switch (nameError(form.controls.lastName.errors)) {
+            @case ('required') {
+              <span class="form__error" role="alert">Укажите фамилию</span>
+            }
+            @case ('minlength') {
+              <span class="form__error" role="alert">Минимум 2 символа</span>
+            }
+            @case ('pattern') {
+              <span class="form__error" role="alert">Только буквы</span>
+            }
+          }
+        }
+      </div>
+    </div>
+
+    <div class="form__aside" aria-hidden="true"></div>
+
+    <div class="form__field-wrap form__field-wrap--comment">
+      <label class="form__label" for="form-comment">Комментарий</label>
+      <textarea
+        id="form-comment"
+        class="form__textarea"
+        formControlName="comment"
+        placeholder="Комментарий"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <div class="form__actions">
+      <button
+        type="submit"
+        class="form__submit"
+        [disabled]="submitting()"
+        [attr.aria-busy]="submitting()"
+      >
+        @if (submitting()) {
+          <span class="form__submit-inner">
+            <span class="form__spinner" aria-hidden="true"></span>
+            <span>Отправка…</span>
+          </span>
+        } @else {
+          Отправить
+        }
+      </button>
+      <p class="form__legal">
+        * Нажимая «Отправить», я принимаю условия
+        <a class="form__legal-link" routerLink="/privacy-policy">обработки персональных данных</a>
+      </p>
+    </div>
+  </div>
+</form>

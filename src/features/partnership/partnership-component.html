@@ -1,0 +1,35 @@
+<article class="partnership">
+  <header class="partnership__hero">
+    <h1 class="partnership__title font-dewi">Сотрудничество</h1>
+    <p class="partnership__lead">
+      Мы ценим профессиональный подход и приглашаем к партнерству дизайнеров интерьера,
+      архитекторов, прорабов и представителей строительных компаний.
+    </p>
+  </header>
+
+  <section class="partnership__cards" aria-label="Преимущества сотрудничества">
+    @for (card of cards; track card.index) {
+      <article
+        class="partnership-card"
+        [class]="'partnership-card partnership-card--' + card.modifier"
+      >
+        <p class="partnership-card__index font-dewi">{{ card.index }}</p>
+        <h2 class="partnership-card__title font-dewi">{{ card.title }}</h2>
+        @if (card.text) {
+          <p class="partnership-card__text">{{ card.text }}</p>
+        }
+        @if (card.list) {
+          <ul class="partnership-card__list">
+            @for (item of card.list; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        }
+      </article>
+    }
+  </section>
+</article>
+
+<section class="partnership-form" aria-label="Форма заявки">
+  <visla-main-form />
+</section>

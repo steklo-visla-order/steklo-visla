@@ -1,0 +1,158 @@
+<header class="header">
+  <button
+    type="button"
+    class="header__menu-toggle"
+    [attr.aria-expanded]="menuOpen()"
+    [attr.aria-label]="menuOpen() ? 'Закрыть меню' : 'Открыть меню'"
+    aria-controls="mobile-nav-panel"
+    (click)="toggleMenu()"
+  >
+    <span class="header__menu-icon" [class.header__menu-icon--open]="menuOpen()" aria-hidden="true">
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+    </span>
+  </button>
+
+  <a routerLink="/" class="brand" aria-label="Visla — на главную">
+    <img src="/logo.png" width="180" alt="Visla — производство стеклянных перегородок" />
+  </a>
+
+  <nav class="nav nav--desktop" aria-label="Основная навигация">
+    @for (item of navLinks; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: item.linkExact ?? false }"
+        class="link"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <div class="actions" role="group" aria-label="Быстрые действия">
+    <button type="button" class="actions__btn actions__btn--ghost" (click)="openCallbackModal()">
+      <span class="actions__btn-icon actions__btn-icon--md" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" focusable="false">
+          <path
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M7 17 17 7 M9 7h8 M17 7v8"
+          />
+        </svg>
+      </span>
+      <span class="actions__btn-label">Оставить заявку</span>
+    </button>
+    <a [href]="phoneHref" class="actions__btn actions__btn--ghost">
+      <span class="actions__btn-icon actions__btn-icon--md" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" focusable="false">
+          <path
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+          />
+        </svg>
+      </span>
+      <span class="actions__btn-label">{{ phoneDisplay }}</span>
+    </a>
+  </div>
+</header>
+
+<aside
+  id="mobile-nav-panel"
+  class="mobile-nav"
+  [class.mobile-nav--open]="menuOpen()"
+  aria-label="Меню"
+  [attr.aria-hidden]="!menuOpen()"
+  [attr.inert]="menuOpen() ? null : ''"
+>
+  <nav class="mobile-nav__inner" aria-label="Основная навигация">
+    @for (item of navLinks; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: item.linkExact ?? false }"
+        class="mobile-nav__link"
+        (click)="closeMenu()"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+</aside>
+
+<main id="main-content" class="main" tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__col footer__col--brand">
+      <a routerLink="/" class="footer__logo-link" aria-label="Visla — на главную">
+        <img class="footer__logo" src="/logo.png" width="160" alt="Висла" />
+      </a>
+      <ul class="footer__social">
+        <li>
+          <a class="footer__social-btn" [href]="phoneHref" aria-label="Позвонить">
+            <img src="/icons/phone.png" alt="" width="20" height="20" />
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer__social-btn"
+            [href]="tgHref"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+          >
+            <img src="/icons/tg.png" alt="" width="20" height="20" />
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer__social-btn"
+            [href]="waHref"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+            <img src="/icons/wa.png" alt="" width="20" height="20" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__col footer__col--center">
+      <nav class="footer__nav" aria-label="Навигация в подвале">
+        @for (item of footerNavLinks; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: item.linkExact ?? false }"
+            class="footer__nav-link"
+            >{{ item.label }}</a
+          >
+        }
+      </nav>
+      <p class="footer__disclaimer">{{ footerDisclaimer }}</p>
+    </div>
+
+    <div class="footer__col footer__col--company">
+      <h2 class="footer__company-title font-dewi">О нас</h2>
+      <p class="footer__company-text">{{ footerCompanyText }}</p>
+      <a class="footer__privacy" routerLink="/privacy-policy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<visla-toast
+  [open]="callbackModalUi.successToastVisible()"
+  [message]="callbackModalUi.successToastText"
+  (closed)="onCallbackToastClosed()"
+/>
+<visla-callback-modal />

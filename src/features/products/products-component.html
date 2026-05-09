@@ -1,0 +1,39 @@
+<article class="products-page" aria-labelledby="products-page-title">
+  <header class="products-page__header">
+    <h1 id="products-page-title" class="products-page__title font-dewi">Продукция</h1>
+    <p class="products-page__lead">
+      Наши решения помогают создавать светлые, стильные и функциональные пространства, в которых
+      сочетаются эстетика, безопасность и практичность
+    </p>
+  </header>
+
+  <ul class="products-page__grid" role="list">
+    @for (slide of slides; track slide.slug) {
+      <li class="products-page__cell">
+        <article
+          class="products-card"
+          [class.products-card--dark]="slide.accent === 'dark'"
+          [class.products-card--light]="slide.accent === 'light'"
+        >
+          <img
+            class="products-card__bg"
+            [src]="slide.image"
+            [alt]="slide.alt"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="products-card__overlay">
+            <h2 class="products-card__title font-dewi">{{ slide.title }}</h2>
+            <div class="products-card__actions">
+              <a
+                class="products-card__pill font-montserrat"
+                [routerLink]="['/products', slide.slug]"
+                [attr.aria-label]="'Подробнее: ' + slide.title"
+              ><span class="products-card__pill-label">{{ slide.category }}</span><span class="products-card__pill-arrow" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </article>
+      </li>
+    }
+  </ul>
+</article>

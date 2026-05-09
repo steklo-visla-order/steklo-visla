@@ -1,0 +1,37 @@
+<article class="projects-page" aria-labelledby="projects-page-title">
+  <header class="projects-page__header">
+    <h1 id="projects-page-title" class="projects-page__title font-dewi">Проекты</h1>
+    <p class="projects-page__lead">
+      Подборка реализованных объектов: перегородки, душевые, козырьки и другие решения из стекла.
+    </p>
+  </header>
+
+  <ul class="projects-page__grid" role="list">
+    @for (slide of slides; track $index) {
+      <li class="projects-page__cell">
+        <article
+          class="projects-card"
+          [class.projects-card--dark]="slide.accent === 'dark'"
+          [class.projects-card--light]="slide.accent === 'light'"
+        >
+          <img
+            class="projects-card__bg"
+            [src]="slide.image"
+            [alt]="slide.alt"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="projects-card__overlay">
+            <div class="projects-card__head">
+              <h2 class="projects-card__title font-dewi">{{ slide.title }}</h2>
+              <p class="projects-card__subtitle font-montserrat">{{ slide.subtitle }}</p>
+            </div>
+            <div class="projects-card__actions">
+              <span class="projects-card__pill font-montserrat"><span class="projects-card__pill-label">{{ slide.category }}</span><span class="projects-card__pill-arrow" aria-hidden="true"></span></span>
+            </div>
+          </div>
+        </article>
+      </li>
+    }
+  </ul>
+</article>

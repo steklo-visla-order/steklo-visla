@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://steklo-visla.ru/sitemap.xml

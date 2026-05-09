@@ -1,0 +1,40 @@
+.visla-toast {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 1.75rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  background: #1e1e1e;
+  border: 1px solid rgb(255 255 255 / 12%);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 45%);
+  transform: translateX(-50%);
+  animation: visla-toast-in 0.35s ease-out;
+}
+
+.visla-toast__text {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 500;
+  color: #fff;
+}
+
+@keyframes visla-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visla-toast {
+    animation: none;
+  }
+}

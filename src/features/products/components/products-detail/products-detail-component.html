@@ -1,0 +1,103 @@
+<article class="products-detail" aria-labelledby="products-detail-title">
+  <header class="products-detail__hero">
+    <div class="products-detail__hero-top">
+      <div class="products-detail__hero-title">
+        <a routerLink="/products" class="products-detail__back font-montserrat">← К продукции</a>
+        <h1 id="products-detail-title" class="products-detail__title font-dewi">
+          {{ page.heroTitle }}
+        </h1>
+      </div>
+
+      <div class="products-detail__hero-actions">
+        <p class="products-detail__lead font-montserrat">{{ page.lead }}</p>
+        <button type="button" class="products-detail__cta font-montserrat" (click)="onOpenCallbackModal()">
+          Заказать звонок
+          <span class="products-detail__cta-icon" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              focusable="false"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M7 17 17 7 M9 7h8 M17 7v8"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <ul class="products-detail__hero-gallery" [attr.aria-label]="'Галерея: ' + page.heroTitle">
+      @for (img of page.heroGallery; track img.src) {
+        <li class="products-detail__hero-gallery-item">
+          <img
+            class="products-detail__hero-gallery-img"
+            [src]="img.src"
+            [alt]="img.alt"
+            width="400"
+            height="533"
+            [attr.fetchpriority]="$index === 0 ? 'high' : undefined"
+          />
+        </li>
+      }
+    </ul>
+  </header>
+
+  <section class="products-detail__cards" aria-labelledby="products-detail-cards-title">
+    <h2 id="products-detail-cards-title" class="products-detail__cards-title font-dewi">
+      {{ page.cardsTitle }}
+    </h2>
+    <ul class="products-detail__grid">
+      @for (card of page.cards; track card.galleryPath) {
+        <li>
+          <article class="products-detail__card">
+            <div class="products-detail__card-visual">
+              <img
+                class="products-detail__card-img"
+                [src]="card.image"
+                [alt]="card.alt"
+                loading="lazy"
+              />
+            </div>
+            <div class="products-detail__card-body">
+              <h3 class="products-detail__card-title font-dewi">{{ card.title }}</h3>
+              <p class="products-detail__card-text font-montserrat">{{ card.description }}</p>
+
+              <div class="products-detail__card-price-container">
+                <p class="products-detail__card-price font-dewi">{{ card.priceFrom }}</p>
+                <a
+                  class="products-detail__card-cta font-montserrat"
+                  [routerLink]="['/products', sectionSlug, card.galleryPath]"
+                  [attr.aria-label]="'Смотреть фото работ: ' + card.title"
+                >
+                  Смотреть фото работ
+                  <span class="products-detail__card-cta-icon" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      focusable="false"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 17 17 7 M9 7h8 M17 7v8"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+  </section>
+</article>

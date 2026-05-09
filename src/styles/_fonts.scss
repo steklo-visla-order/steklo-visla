@@ -1,0 +1,80 @@
+@use 'sass:list';
+@use 'sass:meta';
+@include meta.load-css('fontsource');
+
+$rf-dewi-extended-faces: (
+  'Thin': (
+    100,
+    normal,
+  ),
+  'ThinItalic': (
+    100,
+    italic,
+  ),
+  'Ultralight': (
+    200,
+    normal,
+  ),
+  'UltralightItalic': (
+    200,
+    italic,
+  ),
+  'Light': (
+    300,
+    normal,
+  ),
+  'LightItalic': (
+    300,
+    italic,
+  ),
+  'Regular': (
+    400,
+    normal,
+  ),
+  'Italic': (
+    400,
+    italic,
+  ),
+  'Semibold': (
+    600,
+    normal,
+  ),
+  'SemiboldItalic': (
+    600,
+    italic,
+  ),
+  'Bold': (
+    700,
+    normal,
+  ),
+  'BoldItalic': (
+    700,
+    italic,
+  ),
+  'Ultrabold': (
+    800,
+    normal,
+  ),
+  'UltraboldItalic': (
+    800,
+    italic,
+  ),
+  'Black': (
+    900,
+    normal,
+  ),
+  'BlackItalic': (
+    900,
+    italic,
+  ),
+);
+
+@each $suffix, $props in $rf-dewi-extended-faces {
+  @font-face {
+    font-family: 'RF Dewi Extended';
+    font-style: list.nth($props, 2);
+    font-weight: list.nth($props, 1);
+    font-display: swap;
+    src: url('/fonts/rf-dewi-extended/RFDewiExtended-#{$suffix}.woff2') format('woff2');
+  }
+}

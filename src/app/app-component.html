@@ -1,0 +1,13 @@
+@if (splashPhase() !== 'off') {
+  <div
+    class="app-splash"
+    [class.app-splash--leaving]="splashPhase() === 'leaving'"
+    role="status"
+    aria-live="polite"
+    aria-busy="true"
+  >
+    <div class="app-splash__spinner" aria-hidden="true"></div>
+    <span class="app-splash__sr">Загрузка…</span>
+  </div>
+}
+<router-outlet />

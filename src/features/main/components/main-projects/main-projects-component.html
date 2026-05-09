@@ -1,0 +1,103 @@
+<section class="projects-root" aria-labelledby="projects-title">
+  <div class="projects__header">
+    <h2 id="projects-title" class="projects__title font-dewi">Проекты, которые мы уже воплотили</h2>
+    <div class="projects__actions">
+      <p class="projects__text">
+        Подборка реализованных объектов. Наведите на карточку, чтобы увидеть стекло, фурнитуру и
+        габариты.
+      </p>
+      <div class="projects__nav" aria-label="Навигация по слайдеру проектов">
+        <button
+          type="button"
+          class="projects__nav-btn"
+          (click)="prev()"
+          aria-label="Предыдущий слайд"
+        >
+          <img
+            class="projects__nav-icon"
+            src="/icons/arrow-left.png"
+            width="22"
+            height="22"
+            alt=""
+          />
+        </button>
+        <button
+          type="button"
+          class="projects__nav-btn"
+          (click)="next()"
+          aria-label="Следующий слайд"
+        >
+          <img
+            class="projects__nav-icon"
+            src="/icons/arrow-right.png"
+            width="22"
+            height="22"
+            alt=""
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="projects__swiper-bleed">
+    <swiper-container
+      #swiperEl
+      class="projects__swiper"
+      slides-per-view="3"
+      space-between="16"
+      navigation="false"
+      pagination="false"
+      loop="true"
+      [attr.breakpoints]="swiperBreakpointsAttr"
+    >
+      @for (slide of slides; track $index) {
+        <swiper-slide>
+          <article
+            class="projects__slide"
+            tabindex="0"
+            [class.projects__slide--dark]="slide.accent === 'dark'"
+            [class.projects__slide--light]="slide.accent === 'light'"
+          >
+            <img class="projects__slide-bg" [src]="slide.image" [alt]="slide.alt" loading="lazy" />
+            <div class="projects__slide-dimmer" aria-hidden="true"></div>
+            <div class="projects__slide-overlay">
+              <div class="projects__slide-body">
+                <div class="projects__slide-head">
+                  <h3 class="projects__slide-title">{{ slide.title }}</h3>
+                  <p class="projects__slide-subtitle">{{ slide.subtitle }}</p>
+                </div>
+                <div class="projects__slide-specs">
+                  <div class="projects__slide-specs-inner">
+                    <div class="projects__slide-spec">
+                      <span class="projects__slide-spec-label">Стекло:</span>
+                      <span class="projects__slide-spec-value">{{ slide.glass }}</span>
+                    </div>
+                    <div class="projects__slide-spec">
+                      <span class="projects__slide-spec-label">Фурнитура:</span>
+                      <span class="projects__slide-spec-value">{{ slide.fittings }}</span>
+                    </div>
+                    @if (slide.size) {
+                      <div class="projects__slide-spec">
+                        <span class="projects__slide-spec-label">Размер:</span>
+                        <span class="projects__slide-spec-value">{{ slide.size }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="projects__slide-footer">
+                <div class="projects__slide-actions">
+                  <button
+                    type="button"
+                    class="projects__pill font-montserrat"
+                    [attr.aria-label]="'Подробнее: ' + slide.title"
+                  ><span class="projects__pill-label">{{ slide.category }}</span><span class="projects__pill-arrow" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+</section>

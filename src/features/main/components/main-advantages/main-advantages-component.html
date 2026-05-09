@@ -1,0 +1,26 @@
+<section class="advantages-root" aria-labelledby="advantages-heading">
+  <div class="advantages__actions">
+    <h2 id="advantages-heading" class="advantages__title font-dewi">
+      Преимущества стеклянных перегородок
+      <span class="advantages__title-accent">от Компании Висла</span>
+    </h2>
+
+    <p class="advantages__text">
+      Компания «Висла» производит интерьерные перегородки, которые можно использовать в
+      административных зданиях, жилых домах, офисах, торговых
+    </p>
+  </div>
+
+  <div class="advantages__cards">
+    @for (card of cards; track card.title) {
+      <article class="advantages__card">
+        <div class="advantages__card-header">
+          <h3 class="advantages__card-title">{{ card.title }}</h3>
+          <div class="advantages__number">{{ cardNumber($index) }}</div>
+        </div>
+        <div class="advantages__card-divider"></div>
+        <p class="advantages__card-text">{{ card.text }}</p>
+      </article>
+    }
+  </div>
+</section>

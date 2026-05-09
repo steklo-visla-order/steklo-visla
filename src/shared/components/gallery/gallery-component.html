@@ -1,0 +1,154 @@
+<article class="work-gallery" aria-labelledby="work-gallery-title">
+  <header class="work-gallery__hero">
+    <div class="work-gallery__hero-top">
+      <div class="work-gallery__hero-title">
+        <a [routerLink]="['/products', productSlug]" class="work-gallery__back font-montserrat">← К разделу</a>
+        <h1 id="work-gallery-title" class="work-gallery__title font-dewi">Фото работ: {{ pageTitle }}</h1>
+      </div>
+
+      <div class="work-gallery__hero-actions">
+        <p class="work-gallery__lead font-montserrat">
+          Реальные объекты: как выглядят конструкции после монтажа. Раздел обновляется по мере съёмки новых
+          проектов.
+        </p>
+        <button type="button" class="work-gallery__cta font-montserrat" (click)="onOpenCallbackModal()">
+          Заказать звонок
+          <span class="work-gallery__cta-icon" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              focusable="false"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M7 17 17 7 M9 7h8 M17 7v8"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  @if (photos.length === 0) {
+    <div class="work-gallery__empty font-montserrat" role="status">
+      <p class="work-gallery__empty-title">Скоро здесь будут фотографии</p>
+      <p class="work-gallery__empty-text">
+        Мы готовим подборку снимков для этого направления. Загляните позже или посмотрите варианты
+        исполнения в
+        <a [routerLink]="['/products', productSlug]" class="work-gallery__empty-link">карточке раздела</a>.
+      </p>
+    </div>
+  } @else {
+    <ul class="work-gallery__grid" role="list">
+      @for (photo of photos; track photo.src; let i = $index) {
+        <li class="work-gallery__cell">
+          <button
+            type="button"
+            class="work-gallery__thumb"
+            (click)="openLightbox(i)"
+            [attr.aria-label]="'Открыть фото: ' + photo.alt"
+          >
+            <figure class="work-gallery__figure">
+              <img
+                class="work-gallery__img"
+                [src]="photo.src"
+                [alt]="photo.alt"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+            </figure>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</article>
+
+@if (lightboxOpen()) {
+  <div
+    class="work-gallery__lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Просмотр фотографий"
+  >
+    <button
+      type="button"
+      class="work-gallery__lightbox-backdrop"
+      aria-label="Закрыть просмотр"
+      (click)="closeLightbox()"
+    ></button>
+
+    <button
+      type="button"
+      class="work-gallery__lightbox-close"
+      (click)="closeLightbox()"
+      aria-label="Закрыть"
+    >
+      <svg
+        class="work-gallery__lightbox-close-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          d="M18 6 6 18M6 6l12 12"
+        />
+      </svg>
+    </button>
+
+    <div class="work-gallery__lightbox-inner">
+      <div class="work-gallery__lightbox-nav">
+        <button
+          type="button"
+          class="work-gallery__lightbox-nav-btn"
+          (click)="lightboxPrev()"
+          aria-label="Предыдущее фото"
+        >
+          <img src="/icons/arrow-left.png" width="22" height="22" alt="" />
+        </button>
+        <button
+          type="button"
+          class="work-gallery__lightbox-nav-btn"
+          (click)="lightboxNext()"
+          aria-label="Следующее фото"
+        >
+          <img src="/icons/arrow-right.png" width="22" height="22" alt="" />
+        </button>
+      </div>
+
+      <swiper-container
+        #lightboxSwiperEl
+        class="work-gallery__lightbox-swiper"
+        slides-per-view="1"
+        space-between="0"
+        navigation="false"
+        pagination="false"
+      >
+        @for (photo of photos; track photo.src) {
+          <swiper-slide>
+            <div class="work-gallery__lightbox-slide">
+              <img
+                class="work-gallery__lightbox-img"
+                [src]="photo.src"
+                [alt]="photo.alt"
+                decoding="async"
+              />
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </div>
+}

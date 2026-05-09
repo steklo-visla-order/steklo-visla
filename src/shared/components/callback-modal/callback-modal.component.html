@@ -1,0 +1,134 @@
+@if (shouldRender()) {
+  <div
+    class="callback-modal"
+    [class.callback-modal--closing]="isClosing()"
+    tabindex="0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="callback-modal-title"
+    (click)="onBackdropClick($event)"
+    (keydown)="onBackdropKeydown($event)"
+  >
+    <div class="callback-modal__dialog" [class.callback-modal__dialog--closing]="isClosing()">
+      <button
+        type="button"
+        class="callback-modal__close"
+        aria-label="Закрыть окно"
+        (click)="close()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+
+      <div class="callback-modal__scroll">
+        <h2 id="callback-modal-title" class="callback-modal__title font-dewi">ЗАКАЗАТЬ ЗВОНОК</h2>
+        <p class="callback-modal__lead">Оставьте свой номер телефона и мы вам перезвоним</p>
+
+        <visla-toast
+          [open]="errorToastVisible"
+          [message]="errorToastText"
+          (closed)="onErrorToastClosed()"
+        />
+
+        <form class="callback-modal__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="callback-modal__field-wrap">
+            <input
+              type="text"
+              class="callback-modal__input"
+              formControlName="name"
+              placeholder="Имя*"
+              autocomplete="given-name"
+            />
+            <div class="callback-modal__field-hint" aria-live="polite">
+              @if (submitted && form.controls.name.invalid) {
+                @switch (nameError(form.controls.name.errors)) {
+                  @case ('required') {
+                    <span class="callback-modal__error" role="alert">Укажите имя</span>
+                  }
+                  @case ('minlength') {
+                    <span class="callback-modal__error" role="alert">Минимум 2 символа</span>
+                  }
+                  @case ('pattern') {
+                    <span class="callback-modal__error" role="alert">Только буквы</span>
+                  }
+                }
+              }
+            </div>
+          </div>
+          <div class="callback-modal__field-wrap">
+            <input
+              vislaPhoneRu
+              type="tel"
+              inputmode="tel"
+              class="callback-modal__input"
+              formControlName="phone"
+              placeholder="Телефон*"
+              autocomplete="tel"
+            />
+            <div class="callback-modal__field-hint" aria-live="polite">
+              @if (submitted && form.controls.phone.invalid) {
+                @switch (phoneError(form.controls.phone.errors)) {
+                  @case ('required') {
+                    <span class="callback-modal__error" role="alert">Укажите телефон</span>
+                  }
+                  @case ('mask') {
+                    <span class="callback-modal__error" role="alert">Введите номер полностью</span>
+                  }
+                  @case ('pattern') {
+                    <span class="callback-modal__error" role="alert">Некорректный номер</span>
+                  }
+                }
+              }
+            </div>
+          </div>
+          <textarea
+            class="callback-modal__textarea"
+            formControlName="comment"
+            rows="4"
+            placeholder="Комментарий"
+          ></textarea>
+
+          <p class="callback-modal__legal">
+            Нажимая «Отправить», я принимаю условия
+            <a
+              class="callback-modal__legal-link"
+              routerLink="/privacy-policy"
+              (click)="closeWhenLeavingToPrivacyPolicy()"
+              >обработки персональных данных</a
+            >
+          </p>
+
+          <label class="callback-modal__consent">
+            <input type="checkbox" formControlName="consent" />
+            <span
+              >Я согласен на обработку персональных данных и ознакомлен с условиями политики
+              конфиденциальности ООО «Висла»</span
+            >
+          </label>
+          <div class="callback-modal__field-hint" aria-live="polite">
+            @if (submitted && form.controls.consent.invalid) {
+              <span class="callback-modal__error" role="alert"
+                >Подтвердите согласие на обработку данных</span
+              >
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="callback-modal__submit"
+            [disabled]="submitting"
+            [attr.aria-busy]="submitting"
+          >
+            @if (submitting) {
+              <span class="callback-modal__submit-inner">
+                <span class="callback-modal__spinner" aria-hidden="true"></span>
+                <span>Отправка...</span>
+              </span>
+            } @else {
+              Отправить
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+}
