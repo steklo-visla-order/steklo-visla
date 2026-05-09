@@ -13,7 +13,7 @@ import { SwiperHost } from './models/main-products.models';
 })
 export class MainProductsComponent {
   readonly slides = MAIN_PRODUCTS_SLIDES;
-  readonly swiperBreakpointsAttr = JSON.stringify(MAIN_PRODUCTS_SWIPER_BREAKPOINTS);
+  readonly swiperBreakpoints = MAIN_PRODUCTS_SWIPER_BREAKPOINTS;
 
   private readonly swiperContainer = viewChild<ElementRef<SwiperHost>>('swiperEl');
 

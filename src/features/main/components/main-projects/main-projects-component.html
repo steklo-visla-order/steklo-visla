@@ -43,12 +43,13 @@
     <swiper-container
       #swiperEl
       class="projects__swiper"
-      slides-per-view="3"
+      slides-per-view="1"
       space-between="16"
+      breakpoints-base="window"
       navigation="false"
       pagination="false"
       loop="true"
-      [attr.breakpoints]="swiperBreakpointsAttr"
+      [breakpoints]="swiperBreakpoints"
     >
       @for (slide of slides; track $index) {
         <swiper-slide>

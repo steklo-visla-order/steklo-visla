@@ -1,12 +1,15 @@
 import { IMainProductsSlide } from '../models/main-products.models';
 
-/** До 768px — один слайд на экран (читаемая карточка на телефонах); от 768px — 3 в ряд. */
+
 export const MAIN_PRODUCTS_SWIPER_BREAKPOINTS: Record<
-  string,
+  number,
   { slidesPerView: number; spaceBetween: number }
 > = {
-  '0': { slidesPerView: 1, spaceBetween: 16 },
-  '768': { slidesPerView: 3, spaceBetween: 16 },
+  480: { slidesPerView: 1, spaceBetween: 12 },
+  600: { slidesPerView: 2, spaceBetween: 14 },
+  768: { slidesPerView: 3, spaceBetween: 16 },
+  1024: { slidesPerView: 3, spaceBetween: 18 },
+  1280: { slidesPerView: 3, spaceBetween: 20 },
 };
 
 export const MAIN_PRODUCTS_SLIDES: readonly IMainProductsSlide[] = [

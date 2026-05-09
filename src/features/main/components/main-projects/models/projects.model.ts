@@ -17,4 +17,5 @@ export interface IProjectsSlide {
 
 export type SwiperHost = HTMLElement & {
   swiper?: { slidePrev: () => void; slideNext: () => void };
+  breakpoints?: Record<number, { slidesPerView: number; spaceBetween: number }>;
 };

@@ -301,9 +301,8 @@
   }
 
   .main-products__slide {
-    max-height: min(91vh, 47rem);
-    max-height: min(91dvh, 47rem);
-    aspect-ratio: 5 / 8;
+    max-height: min(62vh, 22rem);
+    max-height: min(62dvh, 22rem);
   }
 }
 
@@ -346,7 +345,7 @@
   }
 
   .main-products__slide-title {
-    font-size: clamp(0.8125rem, 3.2vw + 0.28rem, 1.0625rem);
+    font-size: clamp(1.25rem, 5.6vw + 0.35rem, 1.85rem);
     line-height: 1.12;
   }
 

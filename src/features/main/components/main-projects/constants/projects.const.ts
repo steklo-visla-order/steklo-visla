@@ -1,14 +1,14 @@
 import { IProjectsSlide } from '../models/projects.model';
 
-/**
- * Как у main-products: 1 слайд до 768px, 3 от 768px.
- */
 export const PROJECTS_SWIPER_BREAKPOINTS: Record<
-  string,
+  number,
   { slidesPerView: number; spaceBetween: number }
 > = {
-  '0': { slidesPerView: 1, spaceBetween: 16 },
-  '768': { slidesPerView: 3, spaceBetween: 16 },
+  480: { slidesPerView: 1, spaceBetween: 12 },
+  600: { slidesPerView: 2, spaceBetween: 14 },
+  768: { slidesPerView: 3, spaceBetween: 16 },
+  1024: { slidesPerView: 3, spaceBetween: 18 },
+  1280: { slidesPerView: 3, spaceBetween: 20 },
 };
 
 export const PROJECTS_SLIDES: readonly IProjectsSlide[] = [
