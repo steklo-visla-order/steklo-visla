@@ -1,7 +1,15 @@
 import { Component, DestroyRef, HostListener, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 
 import { SeoService } from '../seo/seo.service';
 import { CallbackModalComponent } from '../../shared/components/callback-modal/callback-modal.component';
@@ -36,6 +44,11 @@ export class LayoutComponent implements OnInit {
 
   readonly menuOpen = signal(false);
 
+  /** Скрывает предыдущий экран, пока грузится ленивый чанк следующего маршрута. */
+  readonly mainOutletPending = signal(false);
+
+  private initialNavigationComplete = false;
+
   readonly navLinks = LAYOUT_NAV_LINKS;
   readonly footerNavLinks = LAYOUT_NAV_LINKS;
   readonly footerDisclaimer = FOOTER_DISCLAIMER;
@@ -60,15 +73,20 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.applyForCurrentRoute();
-    this.router.events
-      .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(() => {
+    this.router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        if (this.initialNavigationComplete) {
+          this.mainOutletPending.set(true);
+        }
+      } else if (event instanceof NavigationEnd) {
+        this.initialNavigationComplete = true;
+        this.mainOutletPending.set(false);
         this.closeMenu();
         this.seo.applyForCurrentRoute();
-      });
+      } else if (event instanceof NavigationCancel || event instanceof NavigationError) {
+        this.mainOutletPending.set(false);
+      }
+    });
   }
 
   toggleMenu(): void {

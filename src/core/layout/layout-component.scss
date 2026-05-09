@@ -431,6 +431,15 @@
   margin-top: 30px;
 }
 
+.main__outlet {
+  min-height: 0;
+
+  &--pending {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 .footer {
   width: calc(100% + 2 * var(--layout-page-margin));
   margin-right: calc(-1 * var(--layout-page-margin));

@@ -87,7 +87,9 @@
 </aside>
 
 <main id="main-content" class="main" tabindex="-1">
-  <router-outlet />
+  <div class="main__outlet" [class.main__outlet--pending]="mainOutletPending()">
+    <router-outlet />
+  </div>
 </main>
 
 <footer class="footer">
